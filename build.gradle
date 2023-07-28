@@ -46,6 +46,12 @@ dependencies {
 
 }
 
+tasks.register('copyPrivate', Copy) {
+	from './GAZUA-private'
+	include "*.yml"
+	into 'src/main/resources'
+}
+
 tasks.named('test') {
 	useJUnitPlatform()
 }
