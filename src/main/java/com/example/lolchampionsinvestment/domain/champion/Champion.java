@@ -16,6 +16,7 @@ public class Champion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "champion_id")
     private Long id;
 
     @Column(name = "name")
@@ -41,9 +42,10 @@ public class Champion {
 
 
     @Builder
-    public Champion(String name, int price, String description, LocalDateTime createDateTime) {
+    public Champion(String name, int price, String img, String description, LocalDateTime createDateTime) {
         this.name = name;
         this.price = price;
+        this.img = img;
         this.description = description;
         this.createDateTime = createDateTime;
     }

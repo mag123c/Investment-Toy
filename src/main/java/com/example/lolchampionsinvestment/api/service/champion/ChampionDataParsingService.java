@@ -25,6 +25,7 @@ public class ChampionDataParsingService {
     private final ChampionRepository championRepository;
 
     private static String path = "/static/json/championFull.json";
+    private static String imgURL = "http://ddragon.leagueoflegends.com/cdn/13.14.1/img/champion/";
 
     public void championsInsertTable() {
         List<Map<String, Object>> championList = championsMapping();
@@ -34,6 +35,7 @@ public class ChampionDataParsingService {
             Champion champion = Champion.builder()
                     .name((String) map.get("name"))
                     .price((int) (Math.random() * 9 + 1) * 1000)
+                    .img(imgURL + (String) map.get("id") + ".png")
                     .description((String) map.get("description"))
                     .createDateTime(LocalDateTime.now())
                     .build();
@@ -53,6 +55,7 @@ public class ChampionDataParsingService {
             Map<String, Map<String, Object>> championMap = (Map<String, Map<String, Object>>) championsMap.get("data");
 
             championList = championMap.values().stream().map(championData -> Map.of(
+                    "id", championData.get("id"),
                     "name", championData.get("name"),
                     "description", championData.get("lore")
             )).toList();

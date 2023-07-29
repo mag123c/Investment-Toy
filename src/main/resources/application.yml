@@ -1,6 +1,10 @@
 spring:
   profiles:
     default: local
+  devtools:
+    livereload:
+      enabled: true
+
 
   # JPA
   jpa:
@@ -18,7 +22,7 @@ spring:
 
   # DB
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://15.164.189.254:51493/GAZUA?useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://3.37.216.236:57287/LOLCI?useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul
     username: diehreo
     password: 021548
