@@ -1,6 +1,7 @@
 package com.example.lolchampionsinvestment.domain.champion;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,14 +18,25 @@ public class Champion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "name")
     private String name;
 
+    @Column(name = "price")
     private int price;
 
+    @Column(name = "total_price")
+    private int total_price;
+
+    @Column(name = "img")
+    private String img;
+
+    @Column(columnDefinition = "TEXT")
     private String description;
 
+    @Column(name = "create_date")
     private LocalDateTime createDateTime;
 
+    @Column(name = "lastupdate_date")
     private LocalDateTime updateDateTime;
 
 

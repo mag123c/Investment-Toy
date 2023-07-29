@@ -1,11 +1,13 @@
 package com.example.lolchampionsinvestment.api.service.champion;
 
+import com.example.lolchampionsinvestment.domain.champion.Champion;
 import com.example.lolchampionsinvestment.domain.champion.ChampionRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -13,7 +15,7 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-@ActiveProfiles("test")
+@Transactional
 class ChampionDataParsingServiceTest {
 
     @Autowired
@@ -26,14 +28,17 @@ class ChampionDataParsingServiceTest {
     void test(){
         //given
         List<Map<String, Object>> championList = championDataParsingService.championsMapping();
+        int listSize = championList.size();
+        int beforeTableSize = championRepository.findAll().size();
 
         //when
-        int beforeTableSize = championRepository.findAll().size();
-        championDataParsingService.addRepository();
+        championDataParsingService.championsInsertTable();
         int afterTableSize = championRepository.findAll().size();
 
         //then
-        assertThat(afterTableSize).isNotEqualTo(beforeTableSize);
+
+        assertThat(afterTableSize).isEqualTo(listSize);
+        assertThat(beforeTableSize).isEqualTo(afterTableSize - championList.size());
 
     }
 

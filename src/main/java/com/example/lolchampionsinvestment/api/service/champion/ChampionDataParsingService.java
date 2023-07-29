@@ -26,7 +26,7 @@ public class ChampionDataParsingService {
 
     private static String path = "/static/json/championFull.json";
 
-    public void addRepository() {
+    public void championsInsertTable() {
         List<Map<String, Object>> championList = championsMapping();
         List<Champion> champions = new ArrayList<>();
 
@@ -37,6 +37,8 @@ public class ChampionDataParsingService {
                     .description((String) map.get("description"))
                     .createDateTime(LocalDateTime.now())
                     .build();
+
+            champions.add(champion);
         }
 
         championRepository.saveAll(champions);

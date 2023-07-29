@@ -1,0 +1,24 @@
+spring:
+  profiles:
+    default: local
+
+  # JPA
+  jpa:
+    show-sql: true
+
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        format_sql: true
+        # backtic
+        auto_quote_keyword: true
+
+  # DB
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://15.164.189.254:51493/GAZUA?useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul
+    username: diehreo
+    password: 021548
