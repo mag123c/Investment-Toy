@@ -28,21 +28,16 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 
-	//h2
-	runtimeOnly 'com.h2database:h2'
-
-	//db
-	implementation group: 'com.mysql', name: 'mysql-connector-j', version: '8.0.33'
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-
 	//security
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
-	testImplementation 'org.springframework.security:spring-security-test'
 
 	//thymeleaf
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+
+	//Jackson
+	implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.14.2'
 
 }
 
@@ -54,4 +49,8 @@ tasks.register('copyPrivate', Copy) {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+test {
+	systemProperty 'spring.profiles.active', 'test'
 }
