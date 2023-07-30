@@ -34,16 +34,9 @@ class ChampionDataParsingControllerTest {
     @DisplayName("챔피언 데이터를 파싱하고 테이블에 등록한다.")
     @Test
     void testChampionDataParsingAndInsertion() throws Exception {
-        //given
-        List<Map<String, Object>> championList = List.of(
-                Map.of("id", "ChampionAId", "name", "ChampionA", "description", "Champion A is a mage."),
-                Map.of("id", "ChampionBId", "name", "ChampionB", "description", "Champion B is an assassin.")
-        );
-
         //when //then
         mockMvc.perform(
                         post("/api/v1/champions/new")
-                                .content(asJsonString(championList))
                                 .contentType(MediaType.APPLICATION_JSON)
                 )
                 .andDo(print())
@@ -55,11 +48,4 @@ class ChampionDataParsingControllerTest {
         verify(championDataParsingService).championsInsertTable();
     }
 
-    private String asJsonString(final Object obj) {
-        try {
-            return new ObjectMapper().writeValueAsString(obj);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
 }

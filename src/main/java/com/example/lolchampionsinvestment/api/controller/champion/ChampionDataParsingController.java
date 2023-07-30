@@ -16,7 +16,6 @@ public class ChampionDataParsingController {
 
     @PostMapping("/api/v1/champions/new")
     public ApiResponse<String> addAllJsonChampionsData() {
-        System.out.println("hello");
         try {
             championDataParsingService.championsInsertTable();
             return ApiResponse.ok("파싱 및 테이블 저장 완료");
