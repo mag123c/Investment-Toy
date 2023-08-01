@@ -1,11 +1,11 @@
 spring:
   profiles:
     default: local
+
+  # devtools
   devtools:
-    livereload:
-      enabled: true
-
-
+    livereload.enable: true
+    restart.enable: true
   # JPA
   jpa:
     show-sql: true
@@ -26,3 +26,9 @@ spring:
     url: jdbc:mysql://3.37.216.236:57287/LOLCI?useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul
     username: diehreo
     password: 021548
+
+logging:
+  level:
+    org:
+      springframework:
+        web: INFO

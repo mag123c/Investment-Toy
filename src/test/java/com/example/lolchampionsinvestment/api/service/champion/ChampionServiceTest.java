@@ -1,8 +1,8 @@
 package com.example.lolchampionsinvestment.api.service.champion;
 
+import com.example.lolchampionsinvestment.domain.champion.Champion;
 import com.example.lolchampionsinvestment.domain.champion.ChampionRepository;
 import jakarta.transaction.Transactional;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +17,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 @ActiveProfiles("test")
 @Transactional
-class ChampionDataParsingServiceTest {
+class ChampionServiceTest {
 
-    @BeforeEach
-    void beforeEach() {
-
-    }
+    @Autowired
+    ChampionService championService;
     @Autowired
     ChampionDataParsingService championDataParsingService;
     @Autowired
@@ -30,7 +28,7 @@ class ChampionDataParsingServiceTest {
 
     @DisplayName("json 데이터를 읽어온다.")
     @Test
-    void test(){
+    void getJsonData(){
         //given
         List<Map<String, Object>> list = championDataParsingService.championsMapping();
 
@@ -39,24 +37,15 @@ class ChampionDataParsingServiceTest {
         assertThat(list).hasSizeGreaterThan(0);
 
     }
-
-    @DisplayName("json파일을 읽어와서 테이블에 챔피언 정보를 등록한다.")
+    @DisplayName("현존하는 모든 챔피언 정보를 가져온다.")
     @Test
-    void getJsonDataAndTableInsert(){
+    void getAllChampionsData(){
         //given
-        List<Map<String, Object>> championList = championDataParsingService.championsMapping();
-        int listSize = championList.size();
-        int beforeTableSize = championRepository.findAll().size();
+        List<Map<String, Object>> jsonList = championDataParsingService.championsMapping();
 
-        //when
+        // when
         championDataParsingService.championsInsertTable();
-        int afterTableSize = championRepository.findAll().size();
-
-        //then
-
-        assertThat(afterTableSize).isEqualTo(listSize);
-        assertThat(beforeTableSize).isEqualTo(afterTableSize - championList.size());
-
+        // then
+        assertThat(championRepository.findAll().size()).isEqualTo(jsonList.size());
     }
-
 }
