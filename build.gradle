@@ -75,7 +75,7 @@ tasks.named('test') {
 //	systemProperty 'spring.profiles.active', 'test'
 //}
 
-// === ⭐ QueryDsl 빌드 옵션 (선택) ===
+// QueryDsl 빌드 옵션 (선택)
 def querydslDir = "$buildDir/generated/querydsl"
 
 sourceSets {

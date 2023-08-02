@@ -1,6 +1,5 @@
 package com.example.lolchampionsinvestment.api.service.champion;
 
-import com.example.lolchampionsinvestment.domain.champion.Champion;
 import com.example.lolchampionsinvestment.domain.champion.ChampionRepository;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.DisplayName;

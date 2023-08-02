@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -59,43 +59,12 @@
     <section class="resume-section" id="champions">
         <div class="resume-section-content">
             <h2 class="mb-5">Champions</h2>
-            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
-                <div class="d-flex flex-row bd-highlight mb-3">
-                    <div class="m-1 border border-2 border-dark bd-highlight">
-                        <h4 class="mt-1 mb-1">챔피언</h4>
-                        <p>1000000 <span class="text-primary">등락폭</span></p>
-                    </div>
-                    <div class="m-1 border border-2 border-dark bd-highlight">
-                        <h4 class="mt-1 mb-1">챔피언</h4>
-                        <p>1000000 <span class="text-primary">등락폭</span></p>
-                    </div>
-                    <div class="m-1 border border-2 border-dark bd-highlight">
-                        <h4 class="mt-1 mb-1">챔피언</h4>
-                        <p>1000000 <span class="text-primary">등락폭</span></p>
-                    </div>
-                    <div class="m-1 border border-2 border-dark bd-highlight">
-                        <h4 class="mt-1 mb-1">챔피언</h4>
-                        <p>1000000 <span class="text-primary">등락폭</span></p>
-                    </div>
-                    <div class="m-1 border border-2 border-dark bd-highlight">
-                        <h4 class="mt-1 mb-1">챔피언</h4>
-                        <p>1000000 <span class="text-primary">등락폭</span></p>
-                    </div>
-                    <div class="m-1 border border-2 border-dark bd-highlight">
-                        <h4 class="mt-1 mb-1">챔피언</h4>
-                        <p>1000000 <span class="text-primary">등락폭</span></p>
-                    </div>
-                    <div class="m-1 border border-2 border-dark bd-highlight">
-                        <h4 class="mt-1 mb-1">챔피언</h4>
-                        <p>1000000 <span class="text-primary">등락폭</span></p>
-                    </div>
-                    <div class="m-1 border border-2 border-dark bd-highlight">
-                        <h4 class="mt-1 mb-1">챔피언</h4>
-                        <p>1000000 <span class="text-primary">등락폭</span></p>
-                    </div>
-                    <div class="m-1 border border-2 border-dark bd-highlight">
-                        <h4 class="mt-1 mb-1">챔피언</h4>
-                        <p>1000000 <span class="text-primary">등락폭</span></p>
+            <div th:each="group : ${groupingList}" class="d-flex flex-column flex-md-row justify-content-between mb-5" style="min-width: 100%;">
+                <div class="d-flex flex-row bd-highlight mb-3" style="min-width: 100%;">
+                    <div th:each="championDto : ${group}" class="m-1 border border-2 border-dark bd-highlight" style="min-width: 12%;">
+                        <h4 class="mt-1 mb-1" th:text="${championDto.name}">Champion</h4>
+                        <p th:text="${championDto.price}"></p>
+                        <p class="text-primary" th:text="${championDto.percent} + '%'"></p>
                     </div>
                 </div>
             </div>

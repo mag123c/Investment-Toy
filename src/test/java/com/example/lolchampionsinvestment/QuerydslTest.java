@@ -6,6 +6,8 @@ import com.example.lolchampionsinvestment.domain.champion.ChampionRepository;
 import com.example.lolchampionsinvestment.domain.champion.QChampion;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,26 +23,24 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DataJpaTest
 @ActiveProfiles("test")
 @Import(QuerydslConfig.class)
+@Transactional
 public class QuerydslTest {
 
-    @Autowired
-    JPAQueryFactory jpaQueryFactory;
-
-    @Autowired
-    ChampionRepository championRepository;
-
-    @Autowired
+    @PersistenceContext
     EntityManager em;
+
+    JPAQueryFactory jpaQueryFactory;
 
     @BeforeEach
     void init() {
+        jpaQueryFactory = new JPAQueryFactory(em);
+
         Champion aatrox = createChampion("Aatrox", 1000, "아트록스", LocalDateTime.now());
         Champion teemo = createChampion("Teemo", 2000, "티모", LocalDateTime.now());
         Champion ahri = createChampion("Ahri", 3000, "아리", LocalDateTime.now());
-
-        championRepository.save(aatrox);
-        championRepository.save(teemo);
-        championRepository.save(ahri);
+        em.persist(aatrox);
+        em.persist(teemo);
+        em.persist(ahri);
     }
 
     @DisplayName("Querydsl test >> 올바르게 insert되었는지 확인")
