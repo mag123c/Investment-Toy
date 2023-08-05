@@ -1,6 +1,12 @@
-package com.example.lolchampionsinvestment.domain.champion;
+package com.example.lolchampionsinvestment.domain.champion.dao;
 
+import com.example.lolchampionsinvestment.domain.champion.domain.Champion;
+import com.example.lolchampionsinvestment.domain.champion.domain.QChampion;
+import com.example.lolchampionsinvestment.domain.champion.domain.QChampionPriceLog;
+import com.example.lolchampionsinvestment.domain.champion.dto.ChampionMainViewDto;
+import com.example.lolchampionsinvestment.domain.champion.dto.ChampionPriceDto;
 import com.querydsl.core.Tuple;
+import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -9,14 +15,16 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.example.lolchampionsinvestment.domain.champion.domain.QChampion.champion;
+
 @Repository
 @RequiredArgsConstructor
-public class ChamiponPriceQueryRepository {
+public class ChampionCustomDao {
 
     private final JPAQueryFactory jpaQueryFactory;
 
     public List<ChampionPriceDto> findAllLatestChampions() {
-        QChampion C = QChampion.champion;
+        QChampion C = champion;
         QChampionPriceLog CPL = QChampionPriceLog.championPriceLog;
 
         List<Tuple> tupleList = jpaQueryFactory.select(C.name, CPL.price, C.price)

@@ -1,7 +1,8 @@
 package com.example.lolchampionsinvestment.api.service.champion;
 
-import com.example.lolchampionsinvestment.domain.champion.ChamiponPriceQueryRepository;
-import com.example.lolchampionsinvestment.domain.champion.ChampionPriceDto;
+import com.example.lolchampionsinvestment.domain.champion.dao.ChampionCustomDao;
+import com.example.lolchampionsinvestment.domain.champion.dto.ChampionPriceDto;
+import com.example.lolchampionsinvestment.domain.champion.service.ChampionDataParsingService;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -26,7 +27,7 @@ public class ChampionPriceQueryRepositoryTest {
     JPAQueryFactory jpaQueryFactory;
 
     @Autowired
-    ChamiponPriceQueryRepository championPriceQueryRepository;
+    ChampionCustomDao championPriceQueryRepository;
     @Autowired
     ChampionDataParsingService championDataParsingService;
 

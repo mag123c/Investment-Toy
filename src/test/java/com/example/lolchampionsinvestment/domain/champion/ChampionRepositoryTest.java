@@ -1,5 +1,7 @@
 package com.example.lolchampionsinvestment.domain.champion;
 
+import com.example.lolchampionsinvestment.domain.champion.dao.ChampionRepository;
+import com.example.lolchampionsinvestment.domain.champion.domain.Champion;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

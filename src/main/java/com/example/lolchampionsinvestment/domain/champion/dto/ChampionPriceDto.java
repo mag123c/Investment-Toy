@@ -1,4 +1,4 @@
-package com.example.lolchampionsinvestment.domain.champion;
+package com.example.lolchampionsinvestment.domain.champion.dto;
 
 import lombok.Data;
 

@@ -1,7 +1,7 @@
-package com.example.lolchampionsinvestment.api.controller.main;
+package com.example.lolchampionsinvestment.api;
 
-import com.example.lolchampionsinvestment.api.service.champion.ChampionService;
-import com.example.lolchampionsinvestment.domain.champion.ChampionPriceDto;
+import com.example.lolchampionsinvestment.domain.champion.service.ChampionService;
+import com.example.lolchampionsinvestment.domain.champion.dto.ChampionMainViewDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,9 +18,10 @@ public class MainViewController {
     @GetMapping("/")
     public ModelAndView mainView() {
         ModelAndView mv = new ModelAndView();
-        List<List<ChampionPriceDto>> groupingList = championService.getAllLatestChampions();
+//        List<List<ChampionPriceDto>> groupingList = championService.getAllLatestChampions();
+        List<ChampionMainViewDto> championMainViewDtos = championService.getAllChampions();
 
-        mv.addObject("groupingList", groupingList);
+        mv.addObject("championMainViewDtos", championMainViewDtos);
         mv.setViewName("main/main.html");
         return mv;
     }

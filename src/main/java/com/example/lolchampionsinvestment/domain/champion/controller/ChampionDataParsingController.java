@@ -1,7 +1,7 @@
-package com.example.lolchampionsinvestment.api.controller.champion;
+package com.example.lolchampionsinvestment.domain.champion.controller;
 
 import com.example.lolchampionsinvestment.api.ApiResponse;
-import com.example.lolchampionsinvestment.api.service.champion.ChampionDataParsingService;
+import com.example.lolchampionsinvestment.domain.champion.service.ChampionDataParsingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;

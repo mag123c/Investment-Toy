@@ -1,4 +1,4 @@
-package com.example.lolchampionsinvestment.domain.champion;
+package com.example.lolchampionsinvestment.domain.champion.domain;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
@@ -22,6 +22,9 @@ public class Champion {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "eng_name")
+    private String eng_name;
+
     @Column(name = "price")
     private int price;
 
@@ -42,8 +45,9 @@ public class Champion {
 
 
     @Builder
-    public Champion(String name, int price, String img, String description, LocalDateTime createDateTime) {
+    public Champion(String name, String eng_name, int price, String img, String description, LocalDateTime createDateTime) {
         this.name = name;
+        this.eng_name = eng_name;
         this.price = price;
         this.img = img;
         this.description = description;

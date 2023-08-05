@@ -1,7 +1,7 @@
-package com.example.lolchampionsinvestment.api.service.champion;
+package com.example.lolchampionsinvestment.domain.champion.service;
 
-import com.example.lolchampionsinvestment.domain.champion.Champion;
-import com.example.lolchampionsinvestment.domain.champion.ChampionRepository;
+import com.example.lolchampionsinvestment.domain.champion.domain.Champion;
+import com.example.lolchampionsinvestment.domain.champion.dao.ChampionRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -34,6 +34,7 @@ public class ChampionDataParsingService {
         for(Map<String, Object> map : championList) {
             Champion champion = Champion.builder()
                     .name((String) map.get("name"))
+                    .eng_name((String) map.get("id"))
                     .price((int) (Math.random() * 9 + 1) * 1000)
                     .img(imgURL + (String) map.get("id") + ".png")
                     .description((String) map.get("description"))

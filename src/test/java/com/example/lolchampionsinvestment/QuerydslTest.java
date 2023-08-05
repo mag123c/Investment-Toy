@@ -1,9 +1,8 @@
 package com.example.lolchampionsinvestment;
 
 import com.example.lolchampionsinvestment.config.QuerydslConfig;
-import com.example.lolchampionsinvestment.domain.champion.Champion;
-import com.example.lolchampionsinvestment.domain.champion.ChampionRepository;
-import com.example.lolchampionsinvestment.domain.champion.QChampion;
+import com.example.lolchampionsinvestment.domain.champion.domain.Champion;
+import com.example.lolchampionsinvestment.domain.champion.domain.QChampion;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -11,7 +10,6 @@ import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;

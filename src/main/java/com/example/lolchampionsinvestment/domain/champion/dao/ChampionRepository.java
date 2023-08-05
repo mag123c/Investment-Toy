@@ -1,5 +1,6 @@
-package com.example.lolchampionsinvestment.domain.champion;
+package com.example.lolchampionsinvestment.domain.champion.dao;
 
+import com.example.lolchampionsinvestment.domain.champion.domain.Champion;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -9,4 +10,6 @@ import java.util.List;
 public interface ChampionRepository extends JpaRepository<Champion, Long> {
 
     List<Champion> findAllByNameIn(List<String> name);
+
+    List<Champion> findAllByOrderByNameAsc();
 }
