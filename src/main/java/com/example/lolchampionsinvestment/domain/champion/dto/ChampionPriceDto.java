@@ -9,11 +9,14 @@ public class ChampionPriceDto {
 
     private int price;
 
+    private int totalPrice;
+
     private int percent;
 
-    public ChampionPriceDto(String name, int price, int percent) {
+    public ChampionPriceDto(String name, int price, int totalPrice, int percent) {
         this.name = name;
         this.price = price;
+        this.totalPrice = totalPrice;
         this.percent = percent;
     }
 }

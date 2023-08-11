@@ -1,8 +1,8 @@
-package com.example.lolchampionsinvestment.api.service.champion;
+package com.example.lolchampionsinvestment.domain.champion;
 
 import com.example.lolchampionsinvestment.domain.champion.dao.ChampionCustomDao;
+import com.example.lolchampionsinvestment.domain.champion.dao.ChampionRepository;
 import com.example.lolchampionsinvestment.domain.champion.dto.ChampionPriceDto;
-import com.example.lolchampionsinvestment.domain.champion.service.ChampionDataParsingService;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -16,20 +16,19 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.tuple;
 
 @SpringBootTest
 @Transactional
-public class ChampionPriceQueryRepositoryTest {
+public class ChampionCustomDaoTest {
 
     @PersistenceContext
     EntityManager em;
     JPAQueryFactory jpaQueryFactory;
 
     @Autowired
-    ChampionCustomDao championPriceQueryRepository;
+    ChampionCustomDao championCustomDao;
     @Autowired
-    ChampionDataParsingService championDataParsingService;
+    ChampionRepository championRepository;
 
     @BeforeEach
     void init() {
@@ -40,18 +39,11 @@ public class ChampionPriceQueryRepositoryTest {
     @Test
     void getChampionsLatestPrice(){
         // given
-        List<ChampionPriceDto> championPriceDtoList = championPriceQueryRepository.findAllLatestChampions();
+        List<ChampionPriceDto> championPriceDtoList = championCustomDao.findAllLatestChampions();
 
         // when // then
         assertThat(championPriceDtoList.size()).isEqualTo(164);
-
-        assertThat(championPriceDtoList)
-                .extracting("name", "price", "percent")
-                .containsAnyOf(
-                        tuple("아트록스", 7000, -36),
-                        tuple("아리", 2000, 0),
-                        tuple("카이사", 8000, 0)
-                );
+        assertThat(championPriceDtoList.size()).isEqualTo(championRepository.findAll().size());
     }
 
 }

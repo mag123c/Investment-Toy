@@ -9,7 +9,6 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,11 +17,11 @@ import java.util.stream.Collectors;
 @Transactional
 public class ChampionService {
 
-    private final ChampionCustomDao championPriceQueryRepository;
+    private final ChampionCustomDao championCustomDao;
 
     private final ChampionRepository championRepository;
 
-    public List<ChampionMainViewDto> getAllChampions() {
+    public List<ChampionMainViewDto> getAllChampionMainViewDto() {
         List<Champion> champions = championRepository.findAllByOrderByNameAsc();
 
         return champions.stream()
@@ -34,16 +33,8 @@ public class ChampionService {
                 .collect(Collectors.toList());
     }
 
-    public List<List<ChampionPriceDto>> getAllLatestChampions() {
-        List<ChampionPriceDto> list = championPriceQueryRepository.findAllLatestChampions();
-        int listSize = list.size();
-
-        List<List<ChampionPriceDto>> groupingList = new ArrayList<>();
-        for(int i = 0; i < listSize; i+=8) {
-            int endIdx = Math.min(i + 8, listSize);
-            groupingList.add(list.subList(i, endIdx));
-        }
-
-        return groupingList;
+    public List<ChampionPriceDto> getAllLatestChampions() {
+        return championCustomDao.findAllLatestChampions();
     }
+
 }

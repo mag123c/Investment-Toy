@@ -1,14 +1,12 @@
 package com.example.lolchampionsinvestment.domain.champion.dao;
 
-import com.example.lolchampionsinvestment.domain.champion.domain.Champion;
 import com.example.lolchampionsinvestment.domain.champion.domain.QChampion;
 import com.example.lolchampionsinvestment.domain.champion.domain.QChampionPriceLog;
-import com.example.lolchampionsinvestment.domain.champion.dto.ChampionMainViewDto;
 import com.example.lolchampionsinvestment.domain.champion.dto.ChampionPriceDto;
 import com.querydsl.core.Tuple;
-import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -17,17 +15,19 @@ import java.util.stream.Collectors;
 
 import static com.example.lolchampionsinvestment.domain.champion.domain.QChampion.champion;
 
+
 @Repository
 @RequiredArgsConstructor
 public class ChampionCustomDao {
 
     private final JPAQueryFactory jpaQueryFactory;
+    private final EntityManager em;
 
     public List<ChampionPriceDto> findAllLatestChampions() {
         QChampion C = champion;
         QChampionPriceLog CPL = QChampionPriceLog.championPriceLog;
 
-        List<Tuple> tupleList = jpaQueryFactory.select(C.name, CPL.price, C.price)
+        List<Tuple> tupleList = jpaQueryFactory.select(C.name, CPL.price, C.price, C.total_price)
                 .from(CPL)
                 .join(C)
                 .on(CPL.champion_id.eq(C.id))
@@ -42,7 +42,7 @@ public class ChampionCustomDao {
                                 )
 
                 )
-                .orderBy(CPL.champion_id.asc())
+                .orderBy(C.total_price.desc())
                 .fetch();
 
         return tupleList.stream()
@@ -50,10 +50,21 @@ public class ChampionCustomDao {
                     String name = tuple.get(C.name);
                     int price = tuple.get(C.price);
                     int cplPrice = tuple.get(CPL.price);
+                    int totalPrice = tuple.get(C.total_price);
                     int percent = Math.round((price - cplPrice) * 100 / cplPrice);
-                    return new ChampionPriceDto(name, price, percent);
+                    return new ChampionPriceDto(name, price, totalPrice, percent);
                 })
                 .collect(Collectors.toList());
+    }
+
+    public void championPriceUpdate(String name, int price) {
+        jpaQueryFactory.update(champion)
+                .set(champion.name, name).set(champion.price, price)
+                .where(champion.name.eq(name))
+                .execute();
+
+        em.flush();
+        em.clear();
     }
 
 }

@@ -1,4 +1,4 @@
-package com.example.lolchampionsinvestment.config;
+package com.example.lolchampionsinvestment.config.database;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;

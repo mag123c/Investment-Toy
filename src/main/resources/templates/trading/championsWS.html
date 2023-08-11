@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <div th:fragment="champions_container" class="trading-menu-div">
+        <table>
+            <thead>
+                <tr>
+                    <th scope="col" class="p-3 th-name">
+                        <a href="#"><span>이름</span></a>
+                    </th>
+                    <th scope="col" class="p-3 th-price">
+                        <a href="#"><span>현재가</span></a>
+                    </th>
+                    <th scope="col" class="p-3 th-percent">
+                        <a href="#"><span>전일대비</span></a>
+                    </th>
+                    <th scope="col" class="p-3 th-totalPrice">
+                        <a href="#"><span>거래량</span></a>
+                    </th>
+                </tr>
+            </thead>
+        </table>
+
+        <div  class="m-2 trading-all-div">
+            <table class="table table-striped">
+                <tbody>
+                    <tr th:each="allChampion : ${allChampion}">
+                        <td class="c-name p-3">
+                            <a href="#"><span th:text="${allChampion.name}"></span></a>
+                        </td>
+                        <td th:text="${allChampion.price}" class="c-price p-3"></td>
+                        <td th:text="${allChampion.percent + '%'}" class="c-percent p-3"></td>
+                        <td th:text="${allChampion.totalPrice}" class="c-totalPrice p-3"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

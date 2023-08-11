@@ -1,6 +1,6 @@
 package com.example.lolchampionsinvestment;
 
-import com.example.lolchampionsinvestment.config.QuerydslConfig;
+import com.example.lolchampionsinvestment.config.database.QuerydslConfig;
 import com.example.lolchampionsinvestment.domain.champion.domain.Champion;
 import com.example.lolchampionsinvestment.domain.champion.domain.QChampion;
 import com.querydsl.jpa.impl.JPAQueryFactory;

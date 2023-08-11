@@ -1,0 +1,10 @@
+.nav2-div {
+    height : 100%;
+    display : flex;
+    justify-content : center;
+    align-items : center;
+}
+
+.nav2-anchor {
+    margin : 0 !important;
+}

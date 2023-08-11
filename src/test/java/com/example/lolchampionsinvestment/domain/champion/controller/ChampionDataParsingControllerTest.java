@@ -1,4 +1,4 @@
-package com.example.lolchampionsinvestment.api.controller.champion;
+package com.example.lolchampionsinvestment.domain.champion.controller;
 
 import com.example.lolchampionsinvestment.domain.champion.service.ChampionDataParsingService;
 import com.example.lolchampionsinvestment.domain.champion.controller.ChampionDataParsingController;
