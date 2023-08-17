@@ -45,7 +45,7 @@ class ChampionRandomUpdaterTest {
         //given
         championDataParsingService.championsInsertTable();
 
-        Map<String, Long> championsDelays = new HashMap<>();
+        Map<String, Integer> championsDelays = new HashMap<>();
         Map<String, Integer> championsPrices = new HashMap<>();
 
         List<Champion> championList = championRepository.findAll();
@@ -58,11 +58,11 @@ class ChampionRandomUpdaterTest {
         int changeCnt = 0;
         Map<String, Integer> championsChangedCheckMap = new HashMap<>();
         while(changeCnt < 2) {
-            for (Map.Entry<String, Long> championMap : championsDelays.entrySet()) {
+            for (Map.Entry<String, Integer> championMap : championsDelays.entrySet()) {
                 if(changeCnt > 2) break;
 
                 String championName = championMap.getKey();
-                long delay = championMap.getValue();
+                int delay = championMap.getValue();
                 int currentPrice = championsPrices.get(championName);
 
                 if (delay <= 0) {
@@ -74,7 +74,7 @@ class ChampionRandomUpdaterTest {
                     championsChangedCheckMap.put(championName, changedPrice);
                     championsDelays.put(championName, generateRandomDelay());
                 } else {
-                    championsDelays.put(championName, delay - 1000);
+                    championsDelays.put(championName, delay - 1);
                 }
             }
 
@@ -100,10 +100,10 @@ class ChampionRandomUpdaterTest {
         return (currentPrice / 100) * (random.nextInt(11) - 5);
     }
 
-    private long generateRandomDelay() {
-        long minDelayMillis = 5000;
-        long maxDelayMillis = 3600000;
+    private int generateRandomDelay() {
+        int minDelay = 5;
+        int maxDelay = 3600;
 
-        return minDelayMillis + random.nextLong() % (maxDelayMillis - minDelayMillis + 1);
+        return minDelay + random.nextInt(maxDelay - minDelay + 1);
     }
 }

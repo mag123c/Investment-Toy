@@ -1,5 +1,6 @@
 package com.example.lolchampionsinvestment.domain.champion.dto;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data
@@ -13,6 +14,7 @@ public class ChampionPriceDto {
 
     private int percent;
 
+    @Builder
     public ChampionPriceDto(String name, int price, int totalPrice, int percent) {
         this.name = name;
         this.price = price;

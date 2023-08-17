@@ -30,7 +30,7 @@ public class ChampionCustomDao {
         List<Tuple> tupleList = jpaQueryFactory.select(C.name, CPL.price, C.price, C.total_price)
                 .from(CPL)
                 .join(C)
-                .on(CPL.champion_id.eq(C.id))
+                .on(CPL.champion_id.eq(C.id.intValue()))
                 .where(
                         Expressions.list(CPL.champion_id, CPL.create_date)
                                 .in(

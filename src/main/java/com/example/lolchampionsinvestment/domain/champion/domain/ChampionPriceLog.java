@@ -20,7 +20,7 @@ public class ChampionPriceLog {
     private Long id;
 
     @Column(name = "champion_id")
-    private Long champion_id;
+    private int champion_id;
 
     @Column(name = "price")
     private int price;
@@ -29,7 +29,7 @@ public class ChampionPriceLog {
     private LocalDateTime create_date;
 
     @Builder
-    public ChampionPriceLog(Long champion_id, int price, LocalDateTime create_date) {
+    public ChampionPriceLog(int champion_id, int price, LocalDateTime create_date) {
         this.champion_id = champion_id;
         this.price = price;
         this.create_date = create_date;
