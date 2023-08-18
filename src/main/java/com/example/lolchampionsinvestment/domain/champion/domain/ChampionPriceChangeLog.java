@@ -8,29 +8,33 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "ChampionPriceLog")
+@Table(name = "ChampionPriceChangeLog")
 @Getter
 @NoArgsConstructor
-public class ChampionPriceLog {
+public class ChampionPriceChangeLog {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "champion_price_id")
+    @Column(name = "log_id")
     private Long id;
 
     @Column(name = "champion_id")
     private int champion_id;
 
-    @Column(name = "price")
-    private int price;
+    @Column(name = "before_price")
+    private int beforePrice;
+
+    @Column(name = "after_price")
+    private int afterPrice;
 
     @Column(name = "create_date")
     private LocalDateTime create_date;
 
     @Builder
-    public ChampionPriceLog(int champion_id, int price, LocalDateTime create_date) {
+    public ChampionPriceChangeLog(int champion_id, int beforePrice, int afterPrice, LocalDateTime create_date) {
         this.champion_id = champion_id;
-        this.price = price;
+        this.beforePrice = beforePrice;
+        this.afterPrice = afterPrice;
         this.create_date = create_date;
     }
 }

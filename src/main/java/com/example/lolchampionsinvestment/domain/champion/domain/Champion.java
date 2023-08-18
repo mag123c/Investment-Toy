@@ -42,7 +42,6 @@ public class Champion {
     @Column(name = "lastupdate_date")
     private LocalDateTime updateDateTime;
 
-
     @Builder
     public Champion(String name, String eng_name, int price, String img, String description, LocalDateTime createDateTime) {
         this.name = name;

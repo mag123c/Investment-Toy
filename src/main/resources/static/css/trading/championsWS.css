@@ -35,3 +35,30 @@ table tr {
 .th-price, .th-percent, .th-totalPrice, .c-price, .c-percent, .c-totalPrice {
     width : 20%;
 }
+
+.red-border {
+    border: 2px solid red;
+    transition: border 1s ease-in-out;
+}
+
+.blue-border {
+    border: 2px solid blue !important;;
+    transition: border 1s ease-in-out !important;;
+}
+
+.red-border {
+    border: 2px solid red !important;;
+    transition: border 1s ease-in-out !important;;
+}
+
+.minus-percent {
+    color : blue !important;;
+}
+
+.plus-percent {
+    color : red !important;
+}
+
+.basic-percent {
+    color : var(--bs-table-striped-color) !important;;
+}

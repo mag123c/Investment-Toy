@@ -27,8 +27,8 @@
         <div  class="m-2 trading-all-div">
             <table class="table table-striped">
                 <tbody>
-                    <tr th:each="allChampion : ${allChampion}">
-                        <td class="c-name p-3">
+                    <tr th:each="allChampion : ${allChampion}" class="c-row">
+                        <td class="c-name p-3" th:data-cid="${allChampion.name}">
                             <a href="#"><span th:text="${allChampion.name}"></span></a>
                         </td>
                         <td th:text="${allChampion.price}" class="c-price p-3"></td>

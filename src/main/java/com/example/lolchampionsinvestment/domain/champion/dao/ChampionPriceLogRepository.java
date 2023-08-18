@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ChampionPriceLogRepository extends JpaRepository<ChampionPriceLog, Long> {
 
-    @Query("select c from ChampionPriceLog c where c.champion_id = :champion_id")
+    @Query("select c from ChampionPriceLog c where c.champion_id = :champion_id order by c.create_date desc limit 1")
     ChampionPriceLog findByChampion_Id(@Param("champion_id") int champion_id);
 }

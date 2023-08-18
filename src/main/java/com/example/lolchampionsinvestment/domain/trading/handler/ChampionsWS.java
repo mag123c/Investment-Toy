@@ -35,11 +35,14 @@ public class ChampionsWS extends TextWebSocketHandler {
 
     public void changeChampionPrice(ChampionPriceDto championPriceDto) throws IOException {
         for(WebSocketSession user : USER) {
-            championPriceDto.getName();
-            championPriceDto.getPrice();
-            championPriceDto.getTotalPrice();
-            championPriceDto.getPercent();
-            user.sendMessage(new TextMessage("d"));
+            String championName = championPriceDto.getName();
+            int price = championPriceDto.getPrice();
+            int percent = championPriceDto.getPercent();
+            int totalPrice = championPriceDto.getTotalPrice();
+            String tmp = "://";
+            String message = "priceChange" + tmp + championName + tmp + price + tmp
+                    + percent + tmp + totalPrice;
+            user.sendMessage(new TextMessage(message));
         }
     }
 

@@ -1,9 +1,11 @@
 package com.example.lolchampionsinvestment.domain.champion.service;
 
 import com.example.lolchampionsinvestment.domain.champion.dao.ChampionCustomDao;
+import com.example.lolchampionsinvestment.domain.champion.dao.ChampionPriceChangeLogRepository;
 import com.example.lolchampionsinvestment.domain.champion.dao.ChampionPriceLogRepository;
 import com.example.lolchampionsinvestment.domain.champion.dao.ChampionRepository;
 import com.example.lolchampionsinvestment.domain.champion.domain.Champion;
+import com.example.lolchampionsinvestment.domain.champion.domain.ChampionPriceChangeLog;
 import com.example.lolchampionsinvestment.domain.champion.domain.ChampionPriceLog;
 import com.example.lolchampionsinvestment.domain.champion.dto.ChampionPriceDto;
 import com.example.lolchampionsinvestment.domain.trading.handler.ChampionsWS;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +29,8 @@ public class ChampionRandomUpdater {
     ChampionRepository championRepository;
     @Autowired
     ChampionPriceLogRepository championPriceLogRepository;
+    @Autowired
+    ChampionPriceChangeLogRepository championPriceChangeLogRepository;
     @Autowired
     ChampionCustomDao championCustomDao;
     @Autowired
@@ -55,19 +60,30 @@ public class ChampionRandomUpdater {
 
             if(delay <= 0) {
                 int changedPrice = currentPrice + generateRandomPrice(currentPrice);
+                if(changedPrice < 0) changedPrice = 0;
+
                 championsPrices.put(championName, changedPrice);
-                championCustomDao.championPriceUpdate(championName, currentPrice + changedPrice);
+                championCustomDao.championPriceUpdate(championName, changedPrice);
 
                 Champion champion = championRepository.findByName(championName);
                 int champion_id = Math.toIntExact(champion.getId());
 
                 ChampionPriceLog cpl = championPriceLogRepository.findByChampion_Id(champion_id);
 
+                championPriceChangeLogRepository.save(
+                        ChampionPriceChangeLog.builder()
+                                .champion_id(champion_id)
+                                .beforePrice(currentPrice)
+                                .afterPrice(changedPrice)
+                                .create_date(LocalDateTime.now())
+                                .build()
+                );
+
                 ChampionPriceDto championPriceDto = ChampionPriceDto.builder()
                         .name(championName)
                         .price(champion.getPrice())
+                        .percent(Math.round((changedPrice - currentPrice) * 100 / cpl.getPrice()))
                         .totalPrice(champion.getTotal_price())
-                        .percent(Math.round((changedPrice - champion.getTotal_price()) * 100 / cpl.getPrice()))
                         .build();
 
                 championsWS.changeChampionPrice(championPriceDto);
