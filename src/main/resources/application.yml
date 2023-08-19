@@ -23,12 +23,20 @@ spring:
   # DB
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://3.37.216.236:57287/LOLCI?useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul
+    jdbc-url: jdbc:mysql://3.37.216.236:57287/LOLCI?useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul
     username: diehreo
     password: 021548
+    
+  # thymeleaf
+  thymeleaf:
+    prefix: classpath:templates/
+    suffix: .html
 
 logging:
   level:
     org:
       springframework:
         web: INFO
+
+random:
+  delay: 2000, 3600000

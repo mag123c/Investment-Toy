@@ -23,7 +23,6 @@ import java.util.stream.Collectors;
 public class ChampionDataParsingService {
 
     private final ChampionRepository championRepository;
-
     private static String path = "/static/json/championFull.json";
     private static String imgURL = "http://ddragon.leagueoflegends.com/cdn/13.14.1/img/champion/";
 
