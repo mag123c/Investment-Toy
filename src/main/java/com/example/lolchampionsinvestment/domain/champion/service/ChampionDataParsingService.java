@@ -28,7 +28,7 @@ public class ChampionDataParsingService {
 
     public void championsInsertTable() {
         List<Map<String, Object>> championList = championsMapping();
-        List<Champion> champions = new ArrayList<>();
+        List<Champion> champions = new ArrayList<Champion>();
 
         for(Map<String, Object> map : championList) {
             Champion champion = Champion.builder()

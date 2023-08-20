@@ -23,7 +23,7 @@ spring:
   # DB
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    jdbc-url: jdbc:mysql://3.37.216.236:57287/LOLCI?useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul
+    url: jdbc:mysql://3.37.216.236:57287/LOLCI?useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul
     username: diehreo
     password: 021548
     
@@ -37,6 +37,3 @@ logging:
     org:
       springframework:
         web: INFO
-
-random:
-  delay: 2000, 3600000

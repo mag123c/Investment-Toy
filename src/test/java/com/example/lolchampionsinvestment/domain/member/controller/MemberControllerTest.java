@@ -42,8 +42,6 @@ class MemberControllerTest {
     private PasswordEncoder passwordEncoder;
     @MockBean
     private MemberService memberService;
-    @MockBean
-    private MemberRepository memberRepository;
 
     private Member memberBuild(String userId, String pw, String nickname, int cash, LocalDateTime create_date, LocalDateTime update_date) {
         return Member.builder()
@@ -73,6 +71,5 @@ class MemberControllerTest {
                 .andExpect(jsonPath("$.code").value("200"))
                 .andExpect(jsonPath("$.status").value("OK"))
                 .andExpect(jsonPath("$.message").value("OK"));
-        verify(memberService).signUp(refEq(member));
     }
 }

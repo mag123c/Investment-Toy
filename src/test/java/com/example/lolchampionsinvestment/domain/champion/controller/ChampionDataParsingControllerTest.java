@@ -1,5 +1,6 @@
 package com.example.lolchampionsinvestment.domain.champion.controller;
 
+import com.example.lolchampionsinvestment.config.SecurityConfig;
 import com.example.lolchampionsinvestment.domain.champion.service.ChampionDataParsingService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
@@ -7,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
@@ -19,6 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(controllers = ChampionDataParsingController.class)
 @ActiveProfiles("test")
+@Import(SecurityConfig.class)
 class ChampionDataParsingControllerTest {
 
     @Autowired
