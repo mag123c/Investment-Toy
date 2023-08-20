@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Entity
 @Table(name = "Member")
@@ -37,24 +38,32 @@ public class Member {
     private LocalDateTime create_date;
 
     @Column(name = "lastupdate_date")
-    private LocalDateTime lastupdate_date;
+    private LocalDateTime update_date;
 
     @Builder
-    public Member(String userId, String pw, String nickname, int cash, LocalDateTime create_date) {
+    public Member(String userId, String pw, String nickname, int cash, LocalDateTime create_date, LocalDateTime update_date) {
         this.userId = userId;
         this.pw = pw;
         this.nickname = nickname;
         this.cash = cash;
         this.create_date = create_date;
+        this.update_date = update_date;
     }
 
-    @Builder
-    public Member(String userId, String pw, String nickname, int cash, LocalDateTime create_date, LocalDateTime lastupdate_date) {
-        this.userId = userId;
-        this.pw = pw;
-        this.nickname = nickname;
-        this.cash = cash;
-        this.create_date = create_date;
-        this.lastupdate_date = lastupdate_date;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Member member = (Member) o;
+        return cash == member.cash &&
+                Objects.equals(userId, member.userId) &&
+                Objects.equals(pw, member.pw) &&
+                Objects.equals(nickname, member.nickname) &&
+                Objects.equals(create_date, member.create_date) &&
+                Objects.equals(update_date, member.update_date);
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(userId, pw, nickname, cash, create_date, update_date);
     }
 }

@@ -17,8 +17,8 @@ public class MemberController {
     private final MemberService memberService;
 
     @PostMapping("/api/v1/member/new")
-    public ApiResponse<String> addAllJsonChampionsData(Member member) {
-        int signUpCheck = memberService.signUpCheck(member);
+    public ApiResponse<String> signUp(Member member) {
+        int signUpCheck = memberService.signUp(member);
         try {
             switch(signUpCheck) {
                 case 0: return ApiResponse.ok("회원가입 완료");

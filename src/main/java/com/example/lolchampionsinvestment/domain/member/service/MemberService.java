@@ -23,7 +23,7 @@ public class MemberService {
      * -4 : NickName Length Error
      * -5 : DataIntegrityViolationException
      */
-    public int singUp(Member member) {
+    public int signUp(Member member) {
         //ID, NickName 중복 확인
         int signUpCheck = signUpCheck(member);
         if(signUpCheck != 0) return signUpCheck;
