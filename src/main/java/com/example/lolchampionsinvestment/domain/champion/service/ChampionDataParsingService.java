@@ -30,20 +30,22 @@ public class ChampionDataParsingService {
         List<Map<String, Object>> championList = championsMapping();
         List<Champion> champions = new ArrayList<Champion>();
 
-        for(Map<String, Object> map : championList) {
-            Champion champion = Champion.builder()
-                    .name((String) map.get("name"))
-                    .eng_name((String) map.get("id"))
-                    .price((int) (Math.random() * 9 + 1) * 1000)
-                    .img(imgURL + (String) map.get("id") + ".png")
-                    .description((String) map.get("description"))
-                    .createDateTime(LocalDateTime.now())
-                    .build();
-
-            champions.add(champion);
+        for(Map<String, Object> champion : championList) {
+            champions.add(championPriceSettings(champion));
         }
 
         championRepository.saveAll(champions);
+    }
+
+    private Champion championPriceSettings(Map<String, Object> map) {
+        return Champion.builder()
+                .name((String) map.get("name"))
+                .eng_name((String) map.get("id"))
+                .price((int) (Math.random() * 9 + 1) * 1000)
+                .img(imgURL + (String) map.get("id") + ".png")
+                .description((String) map.get("description"))
+                .createDateTime(LocalDateTime.now())
+                .build();
     }
 
     public List<Map<String, Object>> championsMapping() {

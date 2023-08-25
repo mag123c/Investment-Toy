@@ -2,6 +2,7 @@ package com.example.lolchampionsinvestment.domain.member.service;
 
 import com.example.lolchampionsinvestment.domain.member.dao.MemberRepository;
 import com.example.lolchampionsinvestment.domain.member.domain.Member;
+import com.example.lolchampionsinvestment.domain.member.dto.MemberSigninDto;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -13,6 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 import static java.time.LocalDateTime.now;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -106,5 +108,26 @@ class MemberServiceTest {
         assertThat(member2LengthCheck)
                 .as("NICKNAME은 4자 이상 20자 이하여야 합니다. 현재 입력하신 닉네임은 '" + member2.getNickname() + "' 입니다.")
                 .isEqualTo(-2);
+    }
+
+    @DisplayName("로그인 성공")
+    @Test
+    void signInSuccess() {
+        MemberSigninDto memberSigninDto = MemberSigninDto.builder()
+                .userId("test")
+                .pw("test1234")
+                .build();
+
+        Optional<Member> member = memberRepository.findByUserId(memberSigninDto.getUserId());
+
+        boolean pwCheck = false;
+        if(member.isPresent()) {
+            String encodePW = member.get().getPw();
+            String rawPW = memberSigninDto.getPw();
+
+            if(passwordEncoder.matches(rawPW, encodePW)) pwCheck = true;
+        }
+
+        assertThat(pwCheck).as("로그인 성공").isTrue();
     }
 }
