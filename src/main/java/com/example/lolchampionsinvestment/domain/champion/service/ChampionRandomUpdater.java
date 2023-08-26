@@ -60,7 +60,7 @@ public class ChampionRandomUpdater {
                 championsPrices.put(championName, changedPrice);
                 championCustomDao.championPriceUpdate(championName, changedPrice);
 
-                Champion champion = championRepository.findByName(championName);
+                Champion champion = championRepository.findByName(championName).get();
                 int champion_id = Math.toIntExact(champion.getId());
 
                 ChampionPriceLog cpl = championPriceLogRepository.findByChampion_Id(champion_id);
