@@ -45,6 +45,10 @@ public class ChampionRandomUpdater {
         }
     }
 
+    /**
+     * championPrice
+     * price's least price is 100
+     */
     @Scheduled(fixedDelay = 1000)
     @Transactional
     public void updateChampionsPrice() throws IOException {
@@ -55,7 +59,7 @@ public class ChampionRandomUpdater {
 
             if(delay <= 0) {
                 int changedPrice = currentPrice + generateRandomPrice(currentPrice);
-                if(changedPrice < 0) changedPrice = 0;
+                if(changedPrice < 100) changedPrice = 100;
 
                 championsPrices.put(championName, changedPrice);
                 championCustomDao.championPriceUpdate(championName, changedPrice);

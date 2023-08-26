@@ -22,7 +22,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
 
-import static com.example.lolchampionsinvestment.domain.member.domain.ME
+import static com.example.lolchampionsinvestment.domain.member.domain.QMember.member;
 import static com.example.lolchampionsinvestment.domain.trading.domain.QMemberChampion.memberChampion;
 
 import java.time.LocalDateTime;

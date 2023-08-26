@@ -10,7 +10,7 @@
   </div>
   <div class="sub_con">
     <div class="form_con">
-      <form action="/member/signin" method="post" name="form1">
+      <form action="/api/v1/member/signin" method="post" name="form1">
         <input type="text" th:value="${user?.getUsername()}" name="id" placeholder="ID" autocomplete="off" required>
         <input type="password" name="pw" placeholder="PW" autocomplete="off" required>
       </form>

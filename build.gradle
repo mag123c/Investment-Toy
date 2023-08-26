@@ -94,7 +94,7 @@ tasks.withType(Test) {
 }
 
 tasks.withType(JavaCompile) {
-	options.generatedSourceOutputDirectory = file(querydslDir)
+	options.getGeneratedSourceOutputDirectory().set(file(querydslDir))
 }
 
 clean.doLast {

@@ -16,8 +16,9 @@ public class TradeViewController {
     @GetMapping("/champions")
     public ModelAndView getTradingViewMain(HttpSession session) {
         ModelAndView mv = new ModelAndView();
-        if(session.getAttribute("UserName") == null) {
-            mv.setViewName("redirect:/member/signin");
+        if(session.getAttribute("userName") == null) {
+            mv.addObject("memeber", "null");
+            mv.setViewName("redirect:/");
         }
         else {
             mv.addObject("allChampion", championService.getAllLatestChampions());
