@@ -9,6 +9,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.util.*;
@@ -85,7 +86,7 @@ class ChampionRandomUpdaterTest {
         assertThat(championsChangedCheckMap).isNotEmpty();
 
         for(String key : championsChangedCheckMap.keySet()) {
-            Champion champion = championRepository.findByName(key).get();
+            Champion champion = championRepository.findByName(key);
             System.out.println("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
             System.out.println(champion.getName());
             System.out.println(champion.getPrice());

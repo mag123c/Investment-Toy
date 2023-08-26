@@ -1,25 +1,20 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragment/head :: common_header(~{::title},~{::link},~{::script})">
+  <title></title>
+
+  <link rel="stylesheet" href="/css/member/signin.css">
+  <script></script>
 </head>
 <body>
-<div class="main_con" th:fragment="signinFragment">
-  <div class="balloon">
-    <span th:text="${fail}"></span>
-  </div>
-  <div class="sub_con">
-    <div class="form_con">
-      <form action="/member/signin" method="post" name="form1">
-        <input type="text" th:value="${user?.getUsername()}" name="id" placeholder="ID" autocomplete="off" required>
-        <input type="password" name="pw" placeholder="PW" autocomplete="off" required>
-      </form>
-    </div>
-    <div class="button_con">
-      <button type="button" class="signin_btn">로그인</button>
-      <button type="button" class="signup_btn">찾기</button>
-    </div>
+<!-- Navigation-->
+<nav th:replace="~{fragment/nav2 :: navFragment}"></nav>
+<!-- MainSection -->
+<div class="d-flex flex-row bd-highlight trading-div m-5">
+  <div class="d-flex flex-column flex-md-row justify-content-between m-2 trading-detail-div">
+    <h1>abc</h1>
   </div>
 </div>
+<script src="/js/member/signin.js"></script>
 </body>
 </html>

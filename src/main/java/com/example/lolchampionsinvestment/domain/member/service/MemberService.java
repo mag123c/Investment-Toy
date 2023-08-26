@@ -2,14 +2,10 @@ package com.example.lolchampionsinvestment.domain.member.service;
 
 import com.example.lolchampionsinvestment.domain.member.dao.MemberRepository;
 import com.example.lolchampionsinvestment.domain.member.domain.Member;
-import com.example.lolchampionsinvestment.domain.member.dto.MemberSigninDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -17,7 +13,6 @@ import java.util.Optional;
 public class MemberService {
 
     private final MemberRepository memberRepository;
-    private final PasswordEncoder passwordEncoder;
 
     /**
      * signupCheck
@@ -34,7 +29,6 @@ public class MemberService {
         if(signUpCheck != 0) return signUpCheck;
 
         try {
-            member.setPw(passwordEncoder.encode(member.getPw()));
             memberRepository.save(member);
             return 0;
         } catch (DataIntegrityViolationException e) {
@@ -53,22 +47,6 @@ public class MemberService {
         if(nickNameLength < 4 || nickNameLength > 20) return -4;
 
         return 0;
-    }
-
-    /**
-     * @return
-     * 0 : 로그인 성공
-     * -1 : 입력한 ID와 일치하는 계정이 존재하지 않음
-     * -2 : 비밀번호 불일치
-     */
-    public int signIn(MemberSigninDto memberSigninDto) {
-        Optional<Member> member = memberRepository.findByUserId(memberSigninDto.getUserId());
-        if(member.isEmpty()) return -1;
-
-        String encodePW = member.get().getPw();
-        String rawPW = memberSigninDto.getPw();
-        if(passwordEncoder.matches(rawPW, encodePW)) return 0;
-        else return -2;
     }
 
 }

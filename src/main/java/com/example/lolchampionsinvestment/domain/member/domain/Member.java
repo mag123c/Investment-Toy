@@ -5,7 +5,6 @@ import jakarta.validation.constraints.Size;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -13,7 +12,6 @@ import java.util.Objects;
 @Entity
 @Table(name = "Member")
 @Getter
-@Setter
 @NoArgsConstructor
 public class Member {
 
@@ -41,10 +39,6 @@ public class Member {
 
     @Column(name = "lastupdate_date")
     private LocalDateTime update_date;
-
-    public Member(String pw) {
-        this.pw = pw;
-    }
 
     @Builder
     public Member(String userId, String pw, String nickname, int cash, LocalDateTime create_date, LocalDateTime update_date) {
