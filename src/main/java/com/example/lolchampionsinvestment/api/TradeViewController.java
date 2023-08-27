@@ -5,25 +5,24 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-@Controller
+@RestController
 public class TradeViewController {
 
     @Autowired
     ChampionService championService;
 
-    @GetMapping("/champions")
-    public ModelAndView getTradingViewMain(HttpSession session) {
-        ModelAndView mv = new ModelAndView();
-        if(session.getAttribute("userName") == null) {
-            mv.addObject("memeber", "null");
-            mv.setViewName("redirect:/");
+    @PostMapping("/champions")
+    @ResponseBody
+    public int getTradingViewMain(String userId) {
+
+        if(userId == null) {
+            return -1;
         }
-        else {
-            mv.addObject("allChampion", championService.getAllLatestChampions());
-            mv.setViewName("trading/trading.html");
-        }
-        return mv;
+        else return 0;
     }
 }
