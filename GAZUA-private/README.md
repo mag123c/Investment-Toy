@@ -1,0 +1,1 @@
+# GAZUA-properties
