@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragment/head :: common_header(~{::title},~{::link},~{::script})">
+    <title></title>
+
+    <link rel="stylesheet" href="/css/trading/trading.css">
+    <link rel="stylesheet" href="/css/trading/championsWS.css">
+    <link rel="stylesheet" href="/css/fragment/nav2.css">
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+</head>
+<body>
+    <!-- Navigation-->
+    <nav th:replace="~{fragment/nav2 :: navFragment}"></nav>
+    <!-- MainSection -->
+    <div class="d-flex flex-row bd-highlight trading-div m-5">
+        <div class="d-flex flex-column flex-md-row justify-content-between m-2 trading-detail-div">
+            <h1>abc</h1>
+        </div>
+        <div th:replace="~{trading/championsWS :: champions_container}"></div>
+    </div>
+<script src="/js/trading/championsWS.js"></script>
+</body>
+</html>

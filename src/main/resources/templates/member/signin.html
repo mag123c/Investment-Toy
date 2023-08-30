@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+<div class="main-con" th:fragment="signinFragment">
+  <span class="text-primary">계정 생성하기</span>
+  <span class="X-btn">X</span>
+  <div class="form-con">
+    <form action="/api/v1/member/signin" method="post" name="form1">
+      <input type="text" name="id" placeholder="ID" autocomplete="off" required>
+      <input type="password" name="pw" placeholder="PW" autocomplete="off" required>
+    </form>
+  </div>
+  <div class="button-con">
+    <button type="button" class="signin-btn">로그인</button>
+    <button type="button" class="signup-btn">찾기</button>
+  </div>
+</div>
+</body>
+</html>
